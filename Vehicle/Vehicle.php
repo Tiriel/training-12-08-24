@@ -1,5 +1,9 @@
 <?php
 
+namespace Vehicle;
+
+use Trait\TimestampableTrait;
+
 class Vehicle
 {
     use TimestampableTrait;

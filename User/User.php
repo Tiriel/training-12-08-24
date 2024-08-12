@@ -1,5 +1,10 @@
 <?php
 
+namespace User;
+
+use Auth\Interface\AuthInterface;
+use Trait\TimestampableTrait;
+
 abstract class User implements AuthInterface
 {
     use TimestampableTrait;

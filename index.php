@@ -1,12 +1,19 @@
 <?php
 
-require 'AuthException.php';
-require 'AuthInterface.php';
-require 'TimestampableTrait.php';
-require 'User.php';
-require 'Member.php';
-require 'AdminLevel.php';
-require 'Admin.php';
+use Auth\Exception\AuthException;
+use Auth\Interface\AuthInterface;
+use User\Admin;
+use User\Enum\AdminLevel;
+use User\Member;
+use User\User;
+
+require __DIR__.'/Auth/Exception/AuthException.php';
+require __DIR__.'/Auth/Interface/AuthInterface.php';
+require __DIR__.'/Trait/TimestampableTrait.php';
+require __DIR__.'/User/User.php';
+require __DIR__.'/User/Member.php';
+require __DIR__.'/User/Enum/AdminLevel.php';
+require __DIR__.'/User/Admin.php';
 
 $m1 = new Member('Ben', 'abcd1234', 37, 'Ben');
 $m2 = new Member('Tom', 'abcd1234', 35, 'Tom');

@@ -1,5 +1,9 @@
 <?php
 
+namespace User;
+
+use Auth\Exception\AuthException;
+
 class Member extends User
 {
     protected static int $instances = 0;

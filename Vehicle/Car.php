@@ -1,5 +1,7 @@
 <?php
 
+namespace Vehicle;
+
 class Car extends Vehicle
 {
     public function __construct(

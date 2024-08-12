@@ -2,8 +2,11 @@
 
 abstract class User implements AuthInterface
 {
+    use TimestampableTrait;
+
     public function __construct(protected string $name)
     {
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getName(): string

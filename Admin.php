@@ -8,9 +8,10 @@ class Admin extends Member
         string $login,
         string $password,
         int $age,
+        string $name,
         protected AdminLevel $level = AdminLevel::Admin,
     ) {
-        parent::__construct($login, $password, $age);
+        parent::__construct($login, $password, $age, $name);
     }
 
     public function auth(string $login, string $password): bool

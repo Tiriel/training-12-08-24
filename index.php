@@ -1,5 +1,6 @@
 <?php
 
+require 'AuthInterface.php';
 require 'Member.php';
 require 'AdminLevel.php';
 require 'Admin.php';

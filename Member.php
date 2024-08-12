@@ -1,6 +1,6 @@
 <?php
 
-class Member
+class Member extends User
 {
     protected static int $instances = 0;
 
@@ -8,7 +8,9 @@ class Member
         protected string $login,
         protected string $password,
         protected int $age,
+        string $name,
     ) {
+        parent::__construct($name);
         static::$instances++;
     }
 

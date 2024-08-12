@@ -1,9 +1,9 @@
 <?php
 
-namespace User;
+namespace App\User;
 
-use Auth\Interface\AuthInterface;
-use Trait\TimestampableTrait;
+use App\Auth\Interface\AuthInterface;
+use App\Trait\TimestampableTrait;
 
 abstract class User implements AuthInterface
 {

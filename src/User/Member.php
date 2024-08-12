@@ -1,8 +1,8 @@
 <?php
 
-namespace User;
+namespace App\User;
 
-use Auth\Exception\AuthException;
+use App\Auth\Exception\AuthException;
 
 class Member extends User
 {

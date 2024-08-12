@@ -1,19 +1,13 @@
 <?php
 
-use Auth\Exception\AuthException;
-use Auth\Interface\AuthInterface;
-use User\Admin;
-use User\Enum\AdminLevel;
-use User\Member;
-use User\User;
+use App\Auth\Exception\AuthException;
+use App\Auth\Interface\AuthInterface;
+use App\User\Admin;
+use App\User\Enum\AdminLevel;
+use App\User\Member;
+use App\User\User;
 
-require __DIR__.'/Auth/Exception/AuthException.php';
-require __DIR__.'/Auth/Interface/AuthInterface.php';
-require __DIR__.'/Trait/TimestampableTrait.php';
-require __DIR__.'/User/User.php';
-require __DIR__.'/User/Member.php';
-require __DIR__.'/User/Enum/AdminLevel.php';
-require __DIR__.'/User/Admin.php';
+require_once __DIR__.'/vendor/autoload.php';
 
 $m1 = new Member('Ben', 'abcd1234', 37, 'Ben');
 $m2 = new Member('Tom', 'abcd1234', 35, 'Tom');

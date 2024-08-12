@@ -27,4 +27,9 @@ class Admin extends Member
     {
         return $this->level->label();
     }
+
+    public function __toString(): string
+    {
+        return 'Admin : '.$this->name;
+    }
 }

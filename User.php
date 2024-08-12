@@ -22,4 +22,6 @@ abstract class User implements AuthInterface
     }
 
     abstract public function auth(string $login, string $password): bool;
+
+    abstract public function __toString(): string;
 }

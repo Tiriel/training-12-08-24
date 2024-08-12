@@ -3,9 +3,9 @@
 class Member
 {
     public function __construct(
-        private string $login,
-        private string $password,
-        private int $age,
+        protected string $login,
+        protected string $password,
+        protected int $age,
     ) {
     }
 

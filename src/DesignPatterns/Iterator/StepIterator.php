@@ -64,4 +64,20 @@ class StepIterator implements \Iterator, \Countable
     {
         return $this->total;
     }
+
+    public function toGenerator(): \Generator
+    {
+        return static::asGenerator(\array_combine($this->keys, $this->values), $this->step);
+    }
+
+    public static function asGenerator(array $data, int $step): \Generator
+    {
+        $keys = \array_keys($data);
+        $values = \array_values($data);
+        $total = \count($data);
+
+        for ($i = 0; $i < $total; $i += $step) {
+            yield $keys[$i] => $values[$i];
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Auth\Exception\AuthException;
 use App\Auth\Interface\AuthInterface;
+use App\DesignPatterns\Factory\PenFactory;
 use App\User\Admin;
 use App\User\Enum\AdminLevel;
 use App\User\Member;
@@ -39,5 +40,14 @@ function auth(AuthInterface $user, array $argv) {
     }
 }
 
+function createPen()
+{
+    $style = ['heading', 'bold', 'small'];
+
+    $pen = PenFactory::create($style);
+    echo $pen->write("I'm decorated!").\PHP_EOL;
+}
+
 displayUser($a1);
 auth($a1, $argv);
+createPen();

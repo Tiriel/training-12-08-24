@@ -57,6 +57,16 @@ class BorrowRepository extends Repository {
     + getModelName(): string
 }
 
+interface EventDispatcherInterface {
+    + dispatch(object event): object
+}
+
+class EventDispatcher implements EventDispatcherInterface {
+    # callable[] listeners
+    + registerListener(string event, callable listener): bool
+    + dispatch(object event): object
+}
+
 class BookManager {
     # BorrowRepository borrowRepository
     # BookRepository bookRepository

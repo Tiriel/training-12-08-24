@@ -13,4 +13,9 @@ class BookManager
     )
     {
     }
+
+    public function getList(): iterable
+    {
+        return $this->bookRepository->list();
+    }
 }

@@ -17,7 +17,6 @@ class Router
             $path = str_replace('/', '\/', $path);
 
             if (\preg_match("#^$path$#", $uri, $matches)) {
-                var_dump($callback);
                 \array_shift($matches);
                 call_user_func($callback, ...$matches);
 

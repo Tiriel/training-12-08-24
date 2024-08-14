@@ -12,7 +12,8 @@ class BookController
 
     public function index(): void
     {
-        echo "index";
+        $list = $this->manager->getList();
+        var_dump($list);
     }
 
     public function borrowBook(int $id): void

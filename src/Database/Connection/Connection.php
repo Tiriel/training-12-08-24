@@ -36,7 +36,7 @@ class Connection
 
     public function insert(object $model): bool
     {
-        if (\array_key_exists($model->getId(), $this->db[$model::class])) {
+        if (isset($this->db[$model::class]) && \array_key_exists($model->getId(), $this->db[$model::class])) {
             return false;
         }
 

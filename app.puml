@@ -1,116 +1,135 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-class Book {
-    - int id
-    - string title
-    - string author
-    - string isbn
-    - enum status
-    + borrow(): void
-    + returnBook(): void
+namespace Database {
+    namespace Model {
+        class Book {
+            - int id
+            - string title
+            - string author
+            - string isbn
+            - enum status
+            + borrow(): void
+            + returnBook(): void
+        }
+
+        class User {
+            - int id
+            - enum role
+            - string password
+            - string email
+            - string username
+        }
+
+        class Borrow {
+            - int id
+            - Book book
+            - User user
+            - DateTimeImmutable borrowedAt
+            - ?DateTimeImmutable returnedAt
+        }
+    }
+
+    namespace Connection {
+        class Connection {
+            # PDO pdo
+            # {static} static _instance
+            + prepare(): Statement
+            + execute(): void
+            + {static} get(): static
+        }
+    }
+
+    namespace Repository {
+        abstract class Repository {
+            # Connection connection
+            # string modelName
+            + __construct()
+            + add(object model): bool
+            + remove(object model): bool
+            + update(object model): bool
+            + get(int id): object
+            + list(): iterable
+            + {abstract} getModelName(): string
+        }
+
+        class BookRepository extends Repository {
+            + getModelName(): string
+        }
+        class UserRepository extends Repository {
+            + getModelName(): string
+        }
+        class BorrowRepository extends Repository {
+            + getModelName(): string
+        }
+    }
+    namespace Manager {
+        class BookManager {
+            # BorrowRepository borrowRepository
+            # BookRepository bookRepository
+            + borrowBook(Book book, User user): bool
+            + returnBook(Book book, User user): bool
+            + getList(): iterable
+        }
+    }
 }
 
-class User {
-    - int id
-    - enum role
-    - string password
-    - string email
-    - string username
+namespace Event {
+    namespace Dispatcher {
+        interface EventDispatcherInterface {
+            + dispatch(object event): object
+        }
+
+        class EventDispatcher implements EventDispatcherInterface {
+            # callable[] listeners
+            + registerListener(string event, callable listener): bool
+            + dispatch(object event): object
+        }
+    }
 }
 
-class Borrow {
-    - int id
-    - Book book
-    - User user
-    - DateTimeImmutable borrowedAt
-    - ?DateTimeImmutable returnedAt
+namespace Notification {
+    interface NotificationServiceInterface {
+        + notify(string message): bool
+    }
+
+    class Notifier implements NotificationServiceInterface {
+        # NotificationService[] notifiers
+        + notify(string message): bool
+        + notifyBookStatusChange(Borrow borrow): bool
+    }
+
+    namespace Notifiers {
+        class EmailNotificationService implements NotificationService {
+            + notify(string message): bool
+        }
+    }
 }
 
-class Connection {
-    # PDO pdo
-    # {static} static _instance
-    + prepare(): Statement
-    + execute(): void
-    + {static} get(): static
+namespace Controller {
+    class BookController {
+        # BookManager manager
+        + index(): void
+        + borrow(): void
+        + returnBook(): void
+    }
 }
 
-abstract class Repository {
-    # Connection connection
-    # string modelName
-    + __construct()
-    + add(object model): bool
-    + remove(object model): bool
-    + update(object model): bool
-    + get(int id): object
-    + list(): iterable
-    + {abstract} getModelName(): string
-}
+namespace Core {
+    class Container implements ContainerInterface {
+        + get(string id): mixed
+        + has(string id): bool
+    }
 
-class BookRepository extends Repository {
-    + getModelName(): string
-}
-class UserRepository extends Repository {
-    + getModelName(): string
-}
-class BorrowRepository extends Repository {
-    + getModelName(): string
-}
-
-interface EventDispatcherInterface {
-    + dispatch(object event): object
-}
-
-class EventDispatcher implements EventDispatcherInterface {
-    # callable[] listeners
-    + registerListener(string event, callable listener): bool
-    + dispatch(object event): object
-}
-
-class BookManager {
-    # BorrowRepository borrowRepository
-    # BookRepository bookRepository
-    + borrowBook(Book book, User user): bool
-    + returnBook(Book book, User user): bool
-    + getList(): iterable
-}
-
-interface NotificationService {
-    + notify(string message): bool
-}
-
-class Notifier implements NotificationService {
-    # NotificationService[] notifiers
-    + notify(string message): bool
-    + notifyBookStatusChange(Borrow borrow): bool
-}
-
-class EmailNotificationService implements NotificationService {
-    + notify(string message): bool
-}
-
-class BookController {
-    # BookManager manager
-    + index(): void
-    + borrow(): void
-    + returnBook(): void
-}
-
-class Container implements ContainerInterface {
-    + get(string id): mixed
-    + has(string id): bool
-}
-
-class Router {
-    + dispatch(string url): void
+    class Router {
+        + dispatch(string url): void
+    }
 }
 
 Book <-- Borrow::book
 User <-- Borrow::user
-Connection <-- Repository::connection
 BookManager::bookRepository --> BookRepository
 BookManager::borrowRepository --> BorrowRepository
-Notifier::notifiers --> NotificationService
 Notifier::notifyBookStatusChange --> Borrow
 BookController::manager --> BookManager
 

@@ -10,11 +10,12 @@ class Borrow
     protected \DateTimeImmutable $borrowedAt;
     protected ?\DateTimeImmutable $returnedAt = null;
 
-    public function __construct(\DateTimeImmutable $borrowedAt, Book $book, User $user)
+    public function __construct(int $id, \DateTimeImmutable $borrowedAt, Book $book, User $user)
     {
         $this->borrowedAt = $borrowedAt;
         $this->book = $book;
         $this->user = $user;
+        $this->id = $id;
     }
 
     public function getId(): ?int

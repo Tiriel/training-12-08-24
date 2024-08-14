@@ -8,6 +8,15 @@ class Container implements ContainerInterface
 {
     private array $services = [];
 
+    private array $env = [];
+
+    public function __construct()
+    {
+        foreach ($_ENV as $var => $value) {
+            $this->env['env:'.$var] = $value;
+        }
+    }
+
     /**
      * @inheritDoc
      */
@@ -30,7 +39,7 @@ class Container implements ContainerInterface
             } else {
                 $attributes = $arg->getAttributes(Dependency::class);
                 foreach ($attributes as $attribute) {
-                    $args[$key] = $attribute->newInstance()->value;
+                    $args[$key] = $this->getScalarValue($attribute->newInstance()->value);
                 }
             }
         }
@@ -44,5 +53,14 @@ class Container implements ContainerInterface
     public function has(string $id): bool
     {
         return \array_key_exists($id, $this->services) || \class_exists($id);
+    }
+
+    private function getScalarValue(string $value): ?string
+    {
+        if (str_starts_with($value, 'env:') && \array_key_exists($value, $this->env)) {
+            return $this->env[$value];
+        }
+
+        return $value;
     }
 }

@@ -12,12 +12,13 @@ class User
     protected string $password;
     protected UserRole $role;
 
-    public function __construct(string $username, string $email, string $password)
+    public function __construct(int $id, string $username, string $email, string $password)
     {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->role = UserRole::User;
+        $this->id = $id;
     }
 
     public function getId(): ?int

@@ -12,12 +12,13 @@ class Book
     protected string $isbn;
     protected BookStatus $status;
 
-    public function __construct(string $title, string $author, string $isbn)
+    public function __construct(int $id, string $title, string $author, string $isbn)
     {
         $this->title = $title;
         $this->author = $author;
         $this->isbn = $isbn;
         $this->status = BookStatus::Available;
+        $this->id = $id;
     }
 
     public function getId(): ?int

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Database\Model;
+namespace App\Database\Orm\Model;
 
-use App\Database\Enum\BookStatus;
+use App\Database\Orm\Enum\BookStatus;
 
 class Book
 {

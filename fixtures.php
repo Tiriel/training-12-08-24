@@ -1,6 +1,6 @@
 <?php
 
-use App\Database\Model\Book;
+use App\Database\Orm\Model\Book;
 
 return [
     new Book(1, '1984', 'George Orwell', '12345678901'),

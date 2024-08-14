@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Database\Repository;
+namespace App\Database\Orm\Repository;
 
-use App\Database\Model\Borrow;
-use App\Database\Repository\Repository;
+use App\Database\Orm\Model\Borrow;
 
 class BorrowRepository extends Repository
 {

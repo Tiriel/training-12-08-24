@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database\Enum;
+namespace App\Database\Orm\Enum;
 
 enum BookStatus: string
 {

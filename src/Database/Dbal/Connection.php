@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Database\Connection;
+namespace App\Database\Dbal;
 
 use App\Core\Dependency;
+use App\Database\Dbal\Connection\ConnectionInterface;
+use App\Database\Dbal\Driver\DriverFactory;
 
 class Connection
 {
-    public array $db = [];
+    public ConnectionInterface $db;
 
     public function __construct(#[Dependency('env:DATABASE_DSN')] string $dsn)
     {
-        //$this->db = new \PDO($dsn);
+        $this->db = DriverFactory::connect($dsn);
     }
 
     // pour add(), update(), remove()

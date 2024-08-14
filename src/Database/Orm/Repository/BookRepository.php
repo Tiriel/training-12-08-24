@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Database\Repository;
+namespace App\Database\Orm\Repository;
 
-use App\Database\Model\Book;
-use App\Database\Repository\Repository;
+use App\Database\Orm\Model\Book;
 
 class BookRepository extends Repository
 {

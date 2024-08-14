@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database\Model;
+namespace App\Database\Orm\Model;
 
 class Borrow
 {

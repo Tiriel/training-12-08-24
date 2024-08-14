@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Database\Manager;
+namespace App\Database\Orm\Manager;
 
-use App\Database\Repository\BookRepository;
-use App\Database\Repository\BorrowRepository;
+use App\Database\Orm\Repository\BookRepository;
+use App\Database\Orm\Repository\BorrowRepository;
 
 class BookManager
 {

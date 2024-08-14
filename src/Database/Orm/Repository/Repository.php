@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Database\Repository;
+namespace App\Database\Orm\Repository;
 
-use App\Database\Connection\Connection;
+use App\Database\Dbal\Connection;
 
 abstract class Repository
 {

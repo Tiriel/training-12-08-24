@@ -14,7 +14,7 @@ $router->addRoute('/', [$container->get(BookController::class), 'index']);
 $router->addRoute('/borrow/(\d+)', [$container->get(BookController::class), 'borrowBook']);
 $router->addRoute('/return/(\d+)', [$container->get(BookController::class), 'returnBook']);
 
-$connection = $container->get(App\Database\Connection\Connection::class);
+$connection = $container->get(App\Database\Dbal\Connection::class);
 foreach ($books as $book) {
     $connection->insert($book);
 }

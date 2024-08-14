@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Database\Manager\BookManager;
+use App\Database\Orm\Manager\BookManager;
 
 class BookController
 {

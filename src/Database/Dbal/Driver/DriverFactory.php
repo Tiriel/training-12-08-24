@@ -5,12 +5,12 @@ namespace App\Database\Dbal\Driver;
 use App\Database\Dbal\Connection\ConnectionInterface;
 use App\Database\Dbal\Driver\DriverInterface;
 
-class DriverFactory implements DriverInterface
+class DriverFactory
 {
-    public static function connect(string $dsn, ?string $user = null, ?string $password = null): ConnectionInterface
+    public static function connect(string $dsn, ?string $user = null, ?string $password = null): DriverInterface
     {
         if (str_starts_with($dsn, 'sqlite')) {
-            return SQLite3Driver::connect($dsn);
+            return new SQLite3Driver($dsn);
         }
 
         $platform = substr($dsn, 0, strpos($dsn, '/'));
@@ -18,6 +18,6 @@ class DriverFactory implements DriverInterface
             throw new \InvalidArgumentException("Authorized drivers must be one of MySQL, MariaDB, PostgreSQL, or SQLite3");
         }
 
-        return PostgreSqlDriver::connect($dsn);
+        return 'postgresql' === $platform ? new PostgreSQLDriver($dsn) : new MySQLDriver($dsn);
     }
 }
